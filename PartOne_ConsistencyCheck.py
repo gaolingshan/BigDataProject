@@ -13,7 +13,7 @@ This program will examine if these codes are uniquely correspond to the descript
 To reproduce the result, please change the variable "df" to the dictory where the data file is saved.
 '''
 
-df = pd.read_csv("../data/NYPD_Complaint_Data_Historic.csv")
+df = pd.read_csv("NYPD_Complaint_Data_Historic.csv")
 # Ideally, we should have equal unique number of "KY_CD" and "OFNS_DESC."
 # Check for each unique value in "KY_CD" (classfication code),
 # if it corresponds more than one unique description

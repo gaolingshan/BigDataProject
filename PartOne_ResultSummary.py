@@ -22,8 +22,7 @@ df_summary = pd.DataFrame(
 df_summary['Column Name'] = colnames
 
 for i in range(24):
-    filename = "/Users/lynngao/NYU/BigData/Project/summary/result/column{0}_summary.csv".format(
-        str(i))
+    filename = "result/column{0}_summary.csv".format(str(i))
     df = pd.read_csv(filename, header=None, names=[
                      colnames[i], 'Base Type', 'Semantic Type', 'Validity'])
     df = df.fillna('Null')
