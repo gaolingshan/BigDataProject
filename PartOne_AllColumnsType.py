@@ -57,7 +57,7 @@ def CMPLNT_DT_label(CMPLNT_DT):
     # Zizhuo Ren revised here
     if (CMPLNT_DT is None) or (CMPLNT_DT == ''):
         label = 'NULL'
-    elif re.match('[0-9]{2}/[0-9]{2}/[0-9]{4}', CMPLNT_DT) is None:
+    elif re.match('^19\d{2}|201[0-5]$', CMPLNT_DT) is None:
         label = 'INVALID'
     else:
         label = 'VALID'
@@ -71,7 +71,7 @@ def CMPLNT_RPT_DT_label(CMPLNT_DT):
 
     if (CMPLNT_DT is None) or (CMPLNT_DT == ''):
         label = 'NULL'
-    elif re.match('[0-9]{2}/[0-9]{2}/[0-9]{4}', CMPLNT_DT) is None:
+    elif re.match('^200[6-9]|201[0-5]$', CMPLNT_DT) is None:
         label = 'INVALID'
     else:
         label = 'VALID'
@@ -253,8 +253,10 @@ def combine_out(data, number):
 	datatype = data_type(data)
 	if number == 0:
 		label = CMPLNT_NUM_label(data)
-	elif number == 1 or number == 3 or number == 5:
+	elif number == 1 or number == 3:
 		label = CMPLNT_DT_label(data)
+	elif number == 5:
+                label = CMPLNT_RPT_DT_label(data)
 	elif number == 2 or number == 4:
 		label = CMPLNT_TM_label(data)
 	elif number == 6 or number == 8:
