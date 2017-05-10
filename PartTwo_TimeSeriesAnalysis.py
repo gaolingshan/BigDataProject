@@ -114,7 +114,7 @@ week = [weekday.ix[0,i] for i in range(3,12)]
 weekend = [weekday.ix[1,i] for i in range(3,12)]
 
 stat,pvalue = stats.ttest_ind(week, weekend)
-print("The p-value for this ttest is", pvalue)
+print("The p-value for this weekday/weekend ttest is", pvalue)
 
 
 #visualize th number of crimes per day in 2015 including holiday/non-holiday
@@ -146,5 +146,5 @@ holiday = new_df['CMPLNT_NUM'].groupby([new_df['If_Public_Holiday'],new_df['YEAR
 holiday_mean = [holiday.ix[0,i] for i in range(2,11)]
 non_holiday_mean = [holiday.ix[1,i] for i in range(2,11)]
 stat,pvalue = stats.ttest_ind(holiday_mean, non_holiday_mean)
-print("The p-value for this ttest is", pvalue)
+print("The p-value for this holiday ttest is", pvalue)
 

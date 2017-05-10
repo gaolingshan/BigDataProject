@@ -13,8 +13,8 @@ from datetime import datetime
 
 #Please remind to keep program and external data files in the same folder
 #read Condo Price Index Data/Labor Data
-condo = pd.read_csv("NYC_Condo_Price_Index.csv").dropna()
-labor = pd.read_csv("NYC_LaborForce_Data.csv").dropna()
+condo = pd.read_csv("ExternalData/NYC_Condo_Price_Index.csv").dropna()
+labor = pd.read_csv("ExternalData/NYC_LaborForce_Data.csv").dropna()
 
 #transfor into DateTime type
 for i in range(len(condo)):
@@ -218,7 +218,7 @@ layout = go.Layout(
     )
 )
 fig = go.Figure(data=data, layout=layout)
-py.image.save_as(fig,filename = "CMPLNT_NUM vs Emp_Pop ratio.png.png")
+py.image.save_as(fig,filename = "CMPLNT_NUM vs Emp_Pop ratio.png")
 
 
 #calculate yearly correlation coefficients

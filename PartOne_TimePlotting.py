@@ -11,8 +11,8 @@ import plotly.graph_objs as go# interactive graphing
 from plotly.graph_objs import Bar, Scatter, Marker, Layout
 
 #load data
-date = pd.read_csv('column1_summary.csv', header = None)
-time = pd.read_csv('column2_summary.csv', header = None)
+date = pd.read_csv('result/column1_summary.csv', header = None)
+time = pd.read_csv('result/column2_summary.csv', header = None)
 
 #drop invalid records
 date = date[date[3] == 'VALID']
@@ -31,7 +31,7 @@ fig1.save('Crimes happend in the last ten years.png')
 
 
 count = pd.DataFrame(time[1].groupby(time[0]).count())
-fig2 = py.iplot([Bar(x=count.index, y=count[1])], filename='Crime Count by Hour')
+fig2 = py.iplot([go.Scatter(x=count.index, y=count[1])], filename='Crime Count by Hour')
 fig2.save('Crime Count by Hour.png')
 
 

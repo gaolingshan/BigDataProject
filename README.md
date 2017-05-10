@@ -38,18 +38,81 @@ $ hfs -get column23_summary.csv
 ##### Crime Distribution by Borough
 
 - run **PartOne_NYCPlotting.py**
+- Please put this program and "NYPD_Complaint_Data_Historic.csv" in the same folder, or modify the path read path to your local "NYPD_Complaint_Data_Historic.csv" file path.
 - This program wil open a file.html in your brower, please export to plot.ly and explore the distribution with plot.ly functions
 
 ###### Crime Distribution across Time/Crime Types
 - run **PartOne_TimePlotting.py**
+- Please put this program and 'result' folder in the same dictionary. This program will read summary files from 'result' folder.
 - This program will automatically produce two graphs called 'Crimes happend in the last ten years.png' and 'Crime Count by Hour.png'
 
 ##### Crime Distribution by Types
 - run **PartOne_TypePlotting.py**
+- Please put this program and "NYPD_Complaint_Data_Historic.csv" in the same folder, or modify the path read path to your local "NYPD_Complaint_Data_Historic.csv" file path.
 - This program willautomatically produce two graphs called 'Top 10 Offense types.png' and 'Percentage of Completed/Attempted.png'
 - This program will also create a database and other graphs for further analysis
 
 6. Other Quality Issues
 In the original dataset, there are a few columns that have "key code" as input, and are followed by columns that have descriptions for the "key code".
 Please run **PartOne_ConsistencyCheck.py** to examine if these codes are uniquely correspond to the descriptions in the following column. To reproduce the result, please keep this file in the dictory where the data file is saved.
-'''
+
+
+
+### Part 2: Data Analysis and Hypothesis Testing
+1. Data Preparation
+
+##### Data Cleaning
+This program takes the original dataset as input and output a cleaned dataset according to Part I’s data type/data quality check.
+Please note that in order for the program to run smoothly and bug-free, please run the program under the directory where the data is saved, and make sure the file name is “NYPD_Complaint_Data_Historic.csv”. Please make sure “USZIPCODE.txt” file is in your 'External' directory. Alternatively, you may revise the directory and file name in the program. 
+Run the **PartTwo_DataCleaning.py**. This part takes around 7 minutes to run. After it is finished, you may expect to see the output file “Cleaned_data_updated_zipcode.csv” under the same directory as the program.
+
+
+##### Geography External Data Source
+The external data (population, sex ratio, age, education attainment and income) that we used for geographical hypothesis analysis are mainly from American Community Survey 2011-2015 Estimate. For more information, please visit https://factfinder.census.gov/. The specific extraction process has been documented in the report in details. The data cleaning process for these external dataset are rather trivial. Instead, we will upload cleaned version of these datasets along with the program for the project.
+Make sure there are five files in the 'ExternalData'directory: “age_sex.csv”, “Education_data.csv”, “Income_data.csv” and “Population_data.csv”
+Run the **PartTwo_DataCombining.py** file in Terminal, make sure this program is in the same dictionary as 'Cleaned_data_updated_zipcode.csv', and the program will generate an output “Ten_Year_Summary.csv”
+
+
+2. Data Analysis
+
+##### Trend in Time Series Distribution
+Run **PartTwo_TimeSeriesAnalysis.py**, and this program will automatically save following graphs:
+- CMPLNT_NUM per year.png
+- CMPLNT_NUM per month.png
+- CMPLNT_NUM per day.png
+- CMPLNT_NUM per weekday.png
+- CMPLNT_NUM per day in 2015(Holiday).png
+You can also check these graphs in 'Time_Series_Plotting' folder which downloaded from github repo.
+Besides, this program will also print two p-values for weekday and holiday hypotheses.
+
+##### Trends in Geographical Distribution
+With existed graphes created in **Crime Distribution by Borough** in Part1 Findings
+
+##### Distribution by Crime Type
+With existed graphes created in **Crime Distribution by Types** in Part1 Findings
+
+3. Hypothesis Testing
+
+##### Time-dimension Hypothesis Tests
+Run **PartTwo_TimeSeriesWithExternalData.py**, and this program will automatically save following graphs:
+- CMPLNT_NUM vs Condo Price Index.png
+- CMPLNT_NUM vs Unemployment Rate(%).png
+- CMPLNT_NUM vs Labor Participation Rate.png
+- CMPLNT_NUM vs Emp_Pop ratio.png
+You can also check these graphs in 'Time_Series_Plotting' folder which downloaded from github repo.
+Besides, this program will also print correlation coefficients for these four hypotheses.
+
+##### Location-dimension Hypothesis Test
+Run **PartTwo_GeoVisualWithExternalData.py**, and this program will automatically save following graphs:
+- educated.png
+- income.png
+- population.png
+- age.png
+- sex_ratio.png
+Please put "Ten_Year_Summay.csv" files under the direction where you want get the viualization results. And make sure **PartTwo_GeoVisualWithExternalData.py** is also within this directory. Run this program with following commands:
+
+``` 
+$ pip install shapely
+$ pip install geoplot
+$ python PartTwo_GeoVisualWithExternalData.py
+```
